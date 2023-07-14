@@ -13,7 +13,7 @@ const Login=async(req,res,User,bcrypt,jwt)=>{
           return res.status(401).json({ error: 'Invalid credentials' });
         }
     
-        const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+        const token = jwt.sign({ userId: user._id}, process.env.JWT_SECRET, { expiresIn: '1h' });
     
         res.status(200).json({ message: 'Login successful', token });
       } catch (error) {
