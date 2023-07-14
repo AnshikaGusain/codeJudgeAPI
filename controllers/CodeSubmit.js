@@ -6,6 +6,7 @@ const codeSubmit = async (req, res,CodeSubmission, spawn, io, socketId,userId) =
 
     // Emit a notification to the client that code execution has started
     io.to(socketId).emit('notification', { socketId: socketId, message: "Code execution starts" });
+    
     // Execute the code in a child process
     const childProcess = spawn('docker', ['run', '--rm', 'sandbox-image', Usercode, language, input]);
 

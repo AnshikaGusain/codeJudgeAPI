@@ -11,7 +11,6 @@ const getSubmission=async (req,res,CodeSubmission)=>{
     
         res.status(200).json(submission);
       } catch (error) {
-        console.error(error);
         res.status(500).json({ error: 'An error occurred' });
       }
 }

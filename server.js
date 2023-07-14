@@ -11,7 +11,6 @@ const { spawn } = require('child_process');
 const { body, validationResult } = require('express-validator');
 const socketIO  = require('socket.io');
 
-
 const codeSubmit= require('./controllers/CodeSubmit');
 const getSubmission=require('./controllers/GetSubmission');
 const Register=require('./controllers/Register');
@@ -146,9 +145,6 @@ const CodeSubmission = mongoose.model('CodeSubmission', codeSubmissionSchema);
 // Create the user model
 const User = mongoose.model('User', userSchema);
 
-
-
-
 // Register a new user
 app.post('/api/register', async (req, res) => {
   Register(req,res,User);
@@ -177,8 +173,6 @@ const authenticateToken = (req, res, next) => {
   });
 };
 
-
-
 // Define the API endpoints
 app.post('/api/code',[
   body('code').notEmpty().withMessage('Code is required'),
@@ -190,8 +184,6 @@ app.post('/api/code',[
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-    // const socketId=req.headers['x-socket-id'];
-    // console.log(id);
 
   codeSubmit(req,res,CodeSubmission,spawn,io,socketId,userId)
 });
