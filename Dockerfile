@@ -1,17 +1,24 @@
 # Base image for multiple language support
 FROM ubuntu:latest
 
-# Install language-specific dependencies
+# Set the working directory
+WORKDIR /app
+
+# Install system dependencies
 RUN apt-get update && apt-get install -y \
     python3 \
-    nodejs \
     openjdk-11-jdk \
     build-essential \
     g++ \
-    gdb
+    gdb \
+    curl
 
-# Set the working directory
-WORKDIR /app
+# Install Node.js using NodeSource repository
+RUN curl -fsSL https://deb.nodesource.com/setup_14.x | bash -
+RUN apt-get install -y nodejs
+
+# Install prompt-sync package
+RUN npm install prompt-sync
 
 # Copy the entry point script
 COPY entrypoint.sh /app/entrypoint.sh

@@ -3,6 +3,8 @@
 code=$1
 language=$2
 input=$3
+input=$(echo "$input" | sed 's/ /\n/g')
+
 
 if [[ "$language" == "python" ]]; then
   echo "$code" > code.py
@@ -13,6 +15,7 @@ if [[ "$language" == "python" ]]; then
     echo "{\"output\":\"Execution Error\",\"error\":\"$result\"}"
   fi
 elif [[ "$language" == "javascript" ]]; then
+
   echo "$code" > code.js
   result=$(node code.js <<< "$input" 2>&1)
   if [[ $? -eq 0 ]]; then

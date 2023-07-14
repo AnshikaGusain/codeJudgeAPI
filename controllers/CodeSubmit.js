@@ -30,7 +30,7 @@ const codeSubmit = async (req, res,CodeSubmission, spawn, io, socketId,userId) =
           // Emit a notification to the client about syntax error
           io.to(socketId).emit('notification', { socketId: socketId, message: "Code execution Failed due to SYNTAX ERROR" });
           const submission = new CodeSubmission({ code: Usercode, language: language, executionResult: 'Syntax Error',userId:userId });
-          res.json({ result: null, error: 'Syntax error', submissionId: submission._id });
+          res.json({ result: null, error: output, submissionId: submission._id });
         } else {
           const result = JSON.parse(output).output;
           const submission = new CodeSubmission({ code: Usercode, language: language, executionResult: result, userId:userId });
